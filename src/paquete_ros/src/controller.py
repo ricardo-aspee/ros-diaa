@@ -5,6 +5,7 @@ import rospy
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Pose2D
 
+# variable Publish que permite en envio de mensajes desde callbacks
 pub = None
 
 def twist_callback(msg):
