@@ -1,0 +1,2 @@
+paquete_ros
+-DCATKIN_DEVEL_PREFIX=/home/alvaro/Documents/catkin_taller1_ws/devel -DCMAKE_INSTALL_PREFIX=/home/alvaro/Documents/catkin_taller1_ws/install -G Unix Makefiles

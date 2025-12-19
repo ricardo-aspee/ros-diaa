@@ -1,0 +1,8 @@
+prefix=/home/alvaro/Documents/catkin_taller1_ws/install
+
+Name: paquete_ros
+Description: Description of paquete_ros
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
