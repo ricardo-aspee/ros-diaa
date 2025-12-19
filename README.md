@@ -1,6 +1,23 @@
 # Control en Lazo Abierto de un Robot Omnidireccional con ROS
 Tarea 1 modulo Robot Operating System
 
+En este proyecto se destacan los siguientes archivos generados correspondientes a los nodos en python y al nodo del simulador de Coppelia en lua.
+
+En **src/paquete_ros/src/** se encuentran los nodos:
+
+**teleop.py**: Script en python que corresponde a Nodo 1: Nodo de Teclado.
+
+**controller.py**: Script en python que corresponde a Nodo 2: Nodo Principal del Robot.
+
+El archivo de configuración de nodos **src/paquete_ros/CMakeLists.txt**.
+
+En **simulation_vrep/** se encuentran los archivos asociados al simulador de Coppelia:
+
+**entorno.ttt**: Scene que se carga en Coppelia con el móvil Pioner p3dx.
+
+**main.lua**: Script en lua que corresponde a Nodo 3: Nodo del Simulador Coppelia.
+
+
 ## Ejecución de cada nodo
 
 1. Antes de ejecutar cada nodo, se debe iniciar roscore en un terminal independiente:
@@ -33,7 +50,7 @@ Tarea 1 modulo Robot Operating System
 
    Una vez iniciado de Coppelia, se debe cargar la escena, para esto se accede a **File > Open Scene ...** y se selecciona el archivo **\~/Documents/catkin_taller1_ws/simulation_vrep/entorno.ttt**.
 > [!CAUTION]
-> Debido a que tengo problemas para guardar los cambios al crear una escena, se utiliza el robot *Pioner p3dx*, al cual se le debe cargar el script de comunicación con ROS que se deja a disposición en la ruta **~/Documents/catkin_taller1_ws/simulation_vrep/main.lua**.
+> Debido a que tengo problemas para guardar los cambios al crear una escena, se utiliza el robot *Pioner p3dx*, al cual se le debe cargar el script de comunicación con ROS que se deja a disposición en la ruta **~/Documents/catkin_taller1_ws/simulation_vrep/main.lua**. Los problemas mencionados corresponde a que se me bloquea la máquina virtual al tratar de generar o manipular una escena que involucre al KUKA youBot, y además, la licencia de Coppelia solicitada que se me suministró, no es válida.
 
 Iniciar la simulación dándole click al botón Play en el Menú.
 
@@ -54,10 +71,15 @@ Se pueden observar los siguientes:
 /vrep/info
 ```
 **/cmd_vel_keyboard**: Publica las teclas ingresadas por el usuario como velocidades en formato **geometry_msgs/Twist**.
+
 **/cmd_vel**: Transmite las velocidades en formato **geometry_msgs/Twist** hacia el simulador en Coppelia.
+
 **/kuka/pose**: El simulador publica las coordenadas de su ubicación en formato **geometry_msgs/Pose2D**.
 
 
 ## Capturas de pantalla
 *Pendiente*
-
+- terminales y coppelia al mismo tiempo
+- terminal de teclado
+- terminal de controller
+- coppelia
