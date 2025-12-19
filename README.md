@@ -78,8 +78,17 @@ Se pueden observar los siguientes:
 
 
 ## Capturas de pantalla
-*Pendiente*
-- terminales y coppelia al mismo tiempo
-- terminal de teclado
-- terminal de controller
-- coppelia
+
+- Terminales con los nodos y coppelia en funcionamiento al mismo tiempo
+
+![Pantallazo 1](https://github.com/ricardo-aspee/ros-diaa/blob/master/pantallazo1.jpg?raw=true)
+
+- Terminal del Nodo 1 de captura de teclado
+
+![Pantallazo 3](https://github.com/ricardo-aspee/ros-diaa/blob/master/pantallazo3.jpg?raw=true)
+
+- Terminal del Nodo 2 Controller
+
+![Pantallazo 2](https://github.com/ricardo-aspee/ros-diaa/blob/master/pantallazo2.jpg?raw=true)
+
+
