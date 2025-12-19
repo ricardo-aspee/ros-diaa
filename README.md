@@ -1,22 +1,17 @@
 # Control en Lazo Abierto de un Robot Omnidireccional con ROS
-Tarea 1 modulo Robot Operating System
+## Tarea 1 modulo Robot Operating System ##
 
 En este proyecto se destacan los siguientes archivos generados correspondientes a los nodos en python y al nodo del simulador de Coppelia en lua.
 
 En **src/paquete_ros/src/** se encuentran los nodos:
-
 **teleop.py**: Script en python que corresponde a Nodo 1: Nodo de Teclado.
-
 **controller.py**: Script en python que corresponde a Nodo 2: Nodo Principal del Robot.
 
 El archivo de configuración de nodos **src/paquete_ros/CMakeLists.txt**.
 
 En **simulation_vrep/** se encuentran los archivos asociados al simulador de Coppelia:
-
 **entorno.ttt**: Scene que se carga en Coppelia con el móvil Pioner p3dx.
-
 **main.lua**: Script en lua que corresponde a Nodo 3: Nodo del Simulador Coppelia.
-
 
 ## Ejecución de cada nodo
 
