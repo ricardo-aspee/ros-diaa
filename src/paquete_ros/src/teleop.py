@@ -25,21 +25,6 @@ def leer_tecla():
         return sys.stdin.read(1)
     return None
 
-def check_movimiento(velocidad_longitudinal, velocidad_rotacional):
-    """ Esta funcion indica si el movil deberia moverse, girar o detenerse 
-    segun las velocidades a enviar"""
-    if velocidad_longitudinal == 0 and velocidad_rotacional == 0:
-        print("Detenido")
-    elif velocidad_longitudinal > 0:
-        print("Avanzando")
-    elif velocidad_longitudinal < 0:
-        print("Retrocediendo")
-    elif velocidad_rotacional > 0:
-        print("Girando a la derecha")
-    elif velocidad_rotacional < 0:
-        print("Girando a la izquierda")
-    
-
 def main():
     """ se incializa el topico y se genera el mensaje a publicar """
     #nombre de este nodo
@@ -52,60 +37,72 @@ def main():
     # Despligue de las teclas que el usuario puede presionar
     print("Controles:")
     print("W: Avanzar | S: Retroceder | A: Izquierda | D: Derecha")
-    print("X: Detener | Q: Salir")
+    print("Q: Giro Izq  | E: Giro Der  | X: Detener")
     
     # Configuración del terminal como entrada 
     old_settings = termios.tcgetattr(sys.stdin)
     tty.setcbreak(sys.stdin.fileno())
     
-    # inicializacion de las velocidades
-    velocidad_longitudinal = 0.0
-    velocidad_rotacional = 0.0
+    # inicializacion de los incrementos de las velocidades
+    incremento_velocidad_longitudinal = 1.2
+    incremento_velocidad_lateral = 0.8
+    incremento_velocidad_rotacional = 0.75
     
-    # incrementos (o reducciones) de las velocidades segun comandos
-    incremento_longitudinal = 0.2
-    incremento_rotacional = 0.2
+    comandos = ['q','w','e','a','s','d','x']
     
     # ciclo principal para la lectura de teclado y la accion segun esta
     try:
         while not rospy.is_shutdown():
             tecla = leer_tecla()
             if tecla:
+                # si tecla no corresponde a los comandos, no realizar accion
+                if tecla not in comandos:
+                    continue
+                
+                # inicializacion de las velocidades
+                velocidad_longitudinal = 0.0
+                velocidad_lateral = 0.0
+                velocidad_rotacional = 0.0
+                
                 tecla = tecla.lower()
                 # aumento de velocidad hacia adelante
                 if tecla == 'w':
-                    velocidad_longitudinal += incremento_longitudinal
-                    velocidad_rotacional = 0
-                    check_movimiento(velocidad_longitudinal, velocidad_rotacional)
+                    print("Avanzando")
+                    velocidad_longitudinal = incremento_velocidad_longitudinal
                 
-                # disminucion de velocidad hacia adelante
+                # retrocediendo
                 elif tecla == 's':
-                    velocidad_longitudinal -= incremento_longitudinal
-                    velocidad_rotacional = 0
-                    check_movimiento(velocidad_longitudinal, velocidad_rotacional)
+                    print("Retrocediendo")
+                    velocidad_longitudinal = -incremento_velocidad_longitudinal
                 
-                # aumento de giro hacia la izquierda o reduccion de velocidad de giro hacia la derecha                
+                # avance hacia la izquierda                
                 elif tecla == 'a':
-                    velocidad_longitudinal = 0
-                    velocidad_rotacional -= incremento_rotacional
-                    check_movimiento(velocidad_longitudinal, velocidad_rotacional)
+                    print("Izquierda")
+                    velocidad_lateral = -incremento_velocidad_lateral
 
-                # aumento de giro hacia la derecha o reduccion de velocidad de giro hacia la izquierda                
+                # avance hacia la derecha
                 elif tecla == 'd':
-                    velocidad_longitudinal = 0
-                    velocidad_rotacional += incremento_rotacional
-                    check_movimiento(velocidad_longitudinal, velocidad_rotacional)
+                    print("Derecha")
+                    velocidad_lateral = incremento_velocidad_lateral
+                    
+                # giro hacia la izquierda                
+                elif tecla == 'q':
+                    print("Girando a la izquierda")
+                    velocidad_rotacional = -incremento_velocidad_rotacional
+
+                # giro hacia la derecha
+                elif tecla == 'e':
+                    print("Girando a la derecha")
+                    velocidad_rotacional = incremento_velocidad_rotacional
                     
                 # detencion del movil
                 elif tecla == 'x':
-                    velocidad_longitudinal = 0
-                    velocidad_rotacional = 0
-                    print("Robot detenido")
+                    print("Detenido")
             
                 # generando el mensaje a publicar
                 twist = Twist()
                 twist.linear.x = velocidad_longitudinal
-                twist.linear.y = 0.0
+                twist.linear.y = velocidad_lateral
                 twist.linear.z = 0.0
                 
                 twist.angular.x = 0.0
